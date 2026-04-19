@@ -3,97 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Game & Wiki Portal</title>
+    <title>Naumov Roblox Hub</title>
     <style>
-        :root { --rbx-bg: #1B1D1E; --rbx-card: #232527; --rbx-blue: #00A2FF; }
-        body { margin: 0; background: var(--rbx-bg); color: white; font-family: 'Segoe UI', sans-serif; }
+        :root { --main-bg: #1B1D1E; --card-bg: #232527; --rbx-blue: #00A2FF; --rbx-green: #00B06F; }
+        body { margin: 0; background: var(--main-bg); color: white; font-family: 'HCo Gotham SSm', sans-serif; }
         
-        header { background: var(--rbx-card); padding: 15px; border-bottom: 1px solid #393B3D; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .logo { height: 25px; cursor: pointer; }
+        header { background: var(--card-bg); padding: 15px; text-align: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; }
+        .logo { height: 30px; }
 
-        .container { padding: 20px; max-width: 1200px; margin: auto; }
-        .wiki-section { margin-bottom: 40px; }
-        h2 { border-left: 4px solid var(--rbx-blue); padding-left: 15px; }
+        .nav { display: flex; justify-content: center; gap: 20px; background: #2a2c2e; padding: 10px; font-size: 14px; font-weight: bold; }
+        .nav a { color: #ccc; text-decoration: none; }
+        .nav a:hover { color: white; }
 
-        /* СЕТКА ИГР */
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .game-card { background: var(--rbx-card); border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
-        .game-card:hover { transform: translateY(-5px); border-color: var(--rbx-blue); }
-        .game-img { width: 100%; height: 160px; background-size: cover; background-position: center; }
-        .game-info { padding: 15px; }
-        .hack-list { font-size: 13px; color: #ADB0B1; padding-left: 20px; margin: 10px 0; }
-        
-        .play-btn { background: var(--rbx-blue); color: white; border: none; width: 100%; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .container { padding: 20px; max-width: 900px; margin: auto; }
 
-        /* ОКНО ИГРЫ */
-        #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; }
-        iframe { width: 100%; height: 100%; border: none; }
-        .stop-btn { position: fixed; top: 10px; left: 10px; z-index: 1100; background: #ff0000; color: white; border: none; padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        /* МАГАЗИН */
+        .shop-title { color: var(--rbx-green); text-transform: uppercase; letter-spacing: 1px; }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 40px; }
+        .shop-item { background: var(--card-bg); padding: 15px; border-radius: 12px; border: 1px solid #444; text-align: center; }
+        .shop-item img { width: 40px; margin-bottom: 10px; }
+        .price { font-size: 18px; font-weight: bold; color: var(--rbx-green); margin: 10px 0; }
+        .buy-btn { background: var(--rbx-green); color: white; border: none; padding: 8px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* ЛАЙФХАКИ */
+        .wiki-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--rbx-blue); }
+        .wiki-card h3 { margin-top: 0; color: var(--rbx-blue); }
+        .wiki-card ul { padding-left: 20px; color: #ADB0B1; line-height: 1.6; }
+        .badge { background: #333; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 5px; }
+
     </style>
 </head>
 <body>
 
 <header>
     <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo">
-    <div style="font-size: 14px; font-weight: bold;">WIKI & PLAY PORTAL</div>
 </header>
 
+<div class="nav">
+    <a href="#shop">МАГАЗИН</a>
+    <a href="#wiki">ЛАЙФХАКИ</a>
+    <a href="#scripts">СКРИПТЫ</a>
+</div>
+
 <div class="container">
-    <section class="wiki-section">
-        <h2>Лайфхаки для твоих игр</h2>
-        <div class="game-grid">
-            
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png');"></div>
-                <div class="game-info">
-                    <h3>Racing Simulator</h3>
-                    <ul class="hack-list">
-                        <li>Как заработать: Используй таймер круга для бонуса x2.</li>
-                        <li>Скрипт: <code>player.leaderstats.Money.Value += 100</code></li>
-                        <li>Секрет: В горах есть скрытый трамплин.</li>
-                    </ul>
-                    <button class="play-btn" onclick="startApp()">ИГРАТЬ</button>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/5028c21a48e77c5957d0f9468006e897/420/420/Image/Png');"></div>
-                <div class="game-info">
-                    <h3>Studio Hacks</h3>
-                    <ul class="hack-list">
-                        <li>Лайфхак: Как сделать кнопку «Log In» рабочей.</li>
-                        <li>Совет: Используй RemoteEvents для передачи данных.</li>
-                        <li>Дизайн: LED-подсветка в комнате ускоряет код!</li>
-                    </ul>
-                    <button class="play-btn" onclick="startApp()">ИГРАТЬ</button>
-                </div>
-            </div>
-
+    
+    <h2 class="shop-title" id="shop">💰 МАГАЗИН РОБУКСОВ (Курс 1₽ = 1 R$)</h2>
+    <p style="font-size: 12px; color: #888;">Пополнение через GamePass. Быстрая доставка!</p>
+    <div class="shop-grid">
+        <div class="shop-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" style="filter: invert(1);">
+            <div>100 Robux</div>
+            <div class="price">100₽</div>
+            <button class="buy-btn" onclick="alert('Напиши админу для оплаты!')">КУПИТЬ</button>
         </div>
-    </section>
+        <div class="shop-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" style="filter: invert(1);">
+            <div>500 Robux</div>
+            <div class="price">500₽</div>
+            <button class="buy-btn" onclick="alert('Напиши админу для оплаты!')">КУПИТЬ</button>
+        </div>
+        <div class="shop-item" style="border-color: gold;">
+            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" style="filter: invert(1);">
+            <div>1000 Robux</div>
+            <div class="price">1000₽</div>
+            <button class="buy-btn" onclick="alert('Напиши админу для оплаты!')">КУПИТЬ</button>
+        </div>
+    </div>
+
+    <h2 id="wiki">📖 ЛУЧШИЕ ЛАЙФХАКИ</h2>
+
+    <div class="wiki-card">
+        <h3>🌱 Grow a Garden</h3>
+        <ul>
+            <li><span class="badge">AFK</span> Встань в углу теплицы, чтобы авто-сборщик работал быстрее.</li>
+            <li><span class="badge">ДЕНЬГИ</span> Сажай золотые семена только под бустом x2 (бывает каждые 30 мин).</li>
+            <li><span class="badge">СЕКРЕТ</span> Если прыгнуть на лейку 5 раз, скорость роста увеличится на 10%.</li>
+        </ul>
+    </div>
+
+    <div class="wiki-card">
+        <h3>👁️ DOORS</h3>
+        <ul>
+            <li><span class="badge">RUSH</span> Если свет мигнул, не беги сразу в шкаф, подожди 2 секунды звука.</li>
+            <li><span class="badge">FIGURE</span> В библиотеке всегда иди вдоль правой стены — там меньше шансов попасться.</li>
+            <li><span class="badge">SHOP</span> Всегда покупай витамины, они спасут на 50-й двери.</li>
+        </ul>
+    </div>
+
+    <div class="wiki-card">
+        <h3>🏗️ СКРИПТИНГ (LUA)</h3>
+        <p style="font-size: 13px; color: #ddd;">Чтобы сделать систему денег в своей игре, вставь этот код в Script (ServerScriptService):</p>
+        <code style="background: #000; display: block; padding: 10px; color: #00ff00; font-size: 12px; border-radius: 5px;">
+            game.Players.PlayerAdded:Connect(function(player)<br>
+            &nbsp;&nbsp;local leaderstats = Instance.new("Folder", player)<br>
+            &nbsp;&nbsp;leaderstats.Name = "leaderstats"<br>
+            &nbsp;&nbsp;local money = Instance.new("IntValue", leaderstats)<br>
+            &nbsp;&nbsp;money.Name = "Money"<br>
+            &nbsp;&nbsp;money.Value = 0<br>
+            end)
+        </code>
+    </div>
+
 </div>
-
-<div id="game-overlay">
-    <button class="stop-btn" onclick="stopApp()">СТОП (ВЫХОД)</button>
-    <iframe id="rbx-engine" src=""></iframe>
-</div>
-
-<script>
-    function startApp() {
-        const overlay = document.getElementById('game-overlay');
-        const engine = document.getElementById('rbx-engine');
-        // Запуск через стабильное облако (все игры внутри)
-        engine.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
-        overlay.style.display = "block";
-    }
-
-    function stopApp() {
-        const overlay = document.getElementById('game-overlay');
-        const engine = document.getElementById('rbx-engine');
-        engine.src = "";
-        overlay.style.display = "none";
-    }
-</script>
 
 </body>
 </html>
