@@ -3,53 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Stealth Tunnel v4.0</title>
+    <title>NAUMOV ROBLOX ACCESS</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #000; font-family: 'Courier New', monospace; overflow: hidden; }
-        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; background: radial-gradient(circle, #0a1f14 0%, #000 100%); transition: 0.5s; }
-        .terminal { border: 2px solid #00ff88; padding: 40px; border-radius: 15px; box-shadow: 0 0 50px rgba(0, 255, 136, 0.3); text-align: center; max-width: 450px; }
-        h1 { color: #00ff88; text-transform: uppercase; letter-spacing: 5px; font-size: 26px; margin-bottom: 10px; }
-        .status-bar { color: #00ff88; font-size: 12px; margin-bottom: 30px; border-bottom: 1px solid #00ff88; padding-bottom: 10px; }
-        .launch-btn { background: #00ff88; color: #000; border: none; padding: 20px 40px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 5px; box-shadow: 0 0 20px #00ff88; transition: 0.3s; }
-        .launch-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px #00ff88; }
-        #proxy-frame { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; }
-        .loader { color: #00ff88; margin-top: 20px; display: none; font-size: 14px; }
+        body { background: #000; color: #00ff88; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { border: 2px solid #00ff88; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
+        .btn { background: #00ff88; color: #000; border: none; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #fff; box-shadow: 0 0 20px #fff; }
+        .loader { margin: 20px 0; font-size: 14px; opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <div id="ui-layer">
-        <div class="terminal">
-            <h1>ULTRA TUNNEL</h1>
-            <div class="status-bar">> INITIALIZING ENCRYPTION... [OK]<br>> BYPASSING FIREWALL... [READY]</div>
-            <button class="launch-btn" onclick="startTunnel()">АКТИВИРОВАТЬ VPN</button>
-            <div id="loader" class="loader">ПОДКЛЮЧЕНИЕ К USA_MIAMI_SERVER...</div>
-        </div>
-    </div>
+<div class="card">
+    <h1>NAUMOV TUNNEL</h1>
+    <div class="loader">СТАТУС: ГОТОВ К ПРОБРОСУ ТРАФИКА</div>
+    <button class="btn" onclick="goToRoblox()">ИГРАТЬ В ROBLOX</button>
+</div>
 
-    <iframe id="proxy-frame" src=""></iframe>
+<script>
+function goToRoblox() {
+    // Используем максимально быстрый и стабильный прокси-сервер
+    window.location.href = "https://nowgg.me/web-proxy/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome";
+}
+</script>
 
-    <script>
-        function startTunnel() {
-            const btn = document.querySelector('.launch-btn');
-            const loader = document.getElementById('loader');
-            const frame = document.getElementById('proxy-frame');
-            const ui = document.getElementById('ui-layer');
-
-            btn.style.display = 'none';
-            loader.style.display = 'block';
-
-            // Используем мощный зашифрованный узел для входа внутри фрейма
-            setTimeout(() => {
-                ui.style.opacity = '0';
-                setTimeout(() => {
-                    ui.style.display = 'none';
-                    frame.style.display = 'block';
-                    // Прямой запуск через защищенный веб-анонимайзер
-                    frame.src = "https://www.croxyproxy.com/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome";
-                }, 500);
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
