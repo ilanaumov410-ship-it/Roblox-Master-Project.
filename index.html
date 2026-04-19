@@ -2,45 +2,56 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Roblox</title>
     <link rel="icon" href="https://www.roblox.com/favicon.ico">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #1b1d1e; overflow: hidden; }
+        /* Полная маскировка под приложение */
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #1b1d1e; overflow: hidden; font-family: sans-serif; }
         
-        /* Твой собственный экран загрузки */
-        #loader {
+        #loading-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #1b1d1e; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 100;
+            background: #232527; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 1000;
         }
-        .logo { width: 60px; margin-bottom: 20px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .rbx-icon { width: 70px; margin-bottom: 20px; }
+        .dots { display: flex; gap: 5px; }
+        .dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-        /* Окно с игрой - растянуто на весь экран */
+        /* Окно игры без рамок и лишних элементов */
         iframe {
             width: 100%; height: 100%; border: none;
             position: absolute; top: 0; left: 0;
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo">
-        <p style="color: white; font-family: sans-serif; font-size: 14px;">ЗАПУСК NAUMOV BYPASS...</p>
+    <div id="loading-layer">
+        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="rbx-icon">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <p style="color: #ccc; font-size: 14px; margin-top: 20px;">Загрузка аккаунта...</p>
     </div>
 
-    <iframe id="rbx" src="https://www.croxyproxy.com/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome"></iframe>
+    <iframe id="roblox-window" src="https://www.roblox.com/login" allow="camera; microphone; clipboard-read; clipboard-write;"></iframe>
 
     <script>
-        const frame = document.getElementById('rbx');
-        const loader = document.getElementById('loader');
+        const frame = document.getElementById('roblox-window');
+        const loader = document.getElementById('loading-layer');
 
-        // Когда игра загрузится, убираем твой экран загрузки
+        // Когда страница логина прогрузится, убираем заставку
         frame.onload = function() {
             setTimeout(() => {
-                loader.style.display = 'none';
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
             }, 1000);
         };
     </script>
