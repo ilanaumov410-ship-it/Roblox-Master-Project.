@@ -3,28 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAUMOV ROBLOX ACCESS</title>
+    <title>NAUMOV SYSTEM</title>
     <style>
-        body { background: #000; color: #00ff88; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .card { border: 2px solid #00ff88; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
-        .btn { background: #00ff88; color: #000; border: none; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: #fff; box-shadow: 0 0 20px #fff; }
-        .loader { margin: 20px 0; font-size: 14px; opacity: 0.7; }
+        body { background: #0a0a0a; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .panel { border: 2px solid #333; padding: 40px; border-radius: 20px; background: #111; box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); text-align: center; width: 300px; transition: 0.5s; }
+        .panel.active { border-color: #00ff88; box-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
+        h1 { font-size: 24px; margin-bottom: 20px; letter-spacing: 2px; }
+        
+        /* Крутой переключатель */
+        .toggle-btn { background: #333; color: #fff; border: none; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%; margin-bottom: 15px; }
+        .toggle-btn.on { background: #ff3333; box-shadow: 0 0 20px rgba(255, 51, 51, 0.5); }
+        .toggle-btn.off { background: #00ff88; color: #000; box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+        
+        #status-text { font-size: 14px; color: #888; font-family: monospace; }
+        .active #status-text { color: #00ff88; }
+        
+        .hidden-link { display: none; margin-top: 20px; color: #00ff88; text-decoration: underline; font-size: 16px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>NAUMOV TUNNEL</h1>
-    <div class="loader">СТАТУС: ГОТОВ К ПРОБРОСУ ТРАФИКА</div>
-    <button class="btn" onclick="goToRoblox()">ИГРАТЬ В ROBLOX</button>
+<div class="panel" id="main-panel">
+    <h1>NAUMOV HUB</h1>
+    <button class="toggle-btn off" id="vpn-btn" onclick="toggleVPN()">ВКЛЮЧИТЬ VPN</button>
+    <div id="status-text">> СИСТЕМА ОТКЛЮЧЕНА</div>
+    
+    <a href="https://www.croxyproxy.com/" target="_blank" class="hidden-link" id="roblox-link">ПЕРЕЙТИ К ШЛЮЗУ</a>
 </div>
 
 <script>
-function goToRoblox() {
-    // Используем максимально быстрый и стабильный прокси-сервер
-    window.location.href = "https://nowgg.me/web-proxy/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome";
-}
+    let isVpnOn = false;
+
+    function toggleVPN() {
+        const btn = document.getElementById('vpn-btn');
+        const panel = document.getElementById('main-panel');
+        const status = document.getElementById('status-text');
+        const link = document.getElementById('roblox-link');
+
+        isVpnOn = !isVpnOn; // Переключаем статус
+
+        if (isVpnOn) {
+            // Режим ВКЛ
+            btn.innerText = "ОТКЛЮЧИТЬ VPN";
+            btn.className = "toggle-btn on";
+            panel.className = "panel active";
+            status.innerText = "> СОЕДИНЕНИЕ УСТАНОВЛЕНО. ТРАФИК ЗАЩИЩЕН.";
+            link.style.display = "block"; // Показываем ссылку
+        } else {
+            // Режим ВЫКЛ
+            btn.innerText = "ВКЛЮЧИТЬ VPN";
+            btn.className = "toggle-btn off";
+            panel.className = "panel";
+            status.innerText = "> СИСТЕМА ОТКЛЮЧЕНА";
+            link.style.display = "none"; // Прячем ссылку
+        }
+    }
 </script>
 
 </body>
