@@ -3,227 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Roblox</title>
-    <link rel="icon" href="https://www.roblox.com/favicon.ico">
+    <title>Naumov Bypass v27.0</title>
     <style>
-        /* ROBLOX CORE CSS REPLICA v23.0 
-           TOTAL STYLES: OVER 2000 LINES OF LOGIC 
-        */
-        :root {
-            --rbx-bg: #1B1D1E;
-            --rbx-header: #232527;
-            --rbx-nav: #393B3D;
-            --rbx-text: #FFFFFF;
-            --rbx-text-sec: #ADB0B1;
-            --rbx-blue: #00A2FF;
-            --rbx-green: #00B06F;
-        }
-
-        body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            background: var(--rbx-bg); color: var(--rbx-text); 
-            font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden; -webkit-font-smoothing: antialiased;
-        }
-
-        /* HEADER SYSTEM */
-        header {
-            background: var(--rbx-header); height: 40px; 
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 12px; border-bottom: 1px solid var(--rbx-nav);
-            position: fixed; top: 0; width: 100%; z-index: 10000;
-        }
-
-        .h-left, .h-right, .h-center { display: flex; align-items: center; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; overflow: hidden; }
         
-        .m-icon { width: 18px; height: 18px; margin-right: 16px; cursor: pointer; filter: invert(1); }
-        .rbx-logo { height: 22px; cursor: pointer; margin-right: 10px; }
+        #terminal { padding: 20px; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         
-        .nav-links { display: none; }
-        @media (min-width: 1000px) {
-            .nav-links { display: flex; gap: 15px; margin-left: 10px; }
-            .nav-link { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; opacity: 0.8; }
-            .nav-link:hover { opacity: 1; }
-        }
+        .glitch { font-size: 30px; font-weight: bold; text-transform: uppercase; position: relative; text-shadow: 0.05em 0 0 #00ff00, -0.025em -0.05em 0 #ff0000, 0.025em 0.05em 0 #0000ff; animation: glitch 1s infinite; }
+        @keyframes glitch { 0% { text-shadow: 0.05em 0 0 #00ff00; } 14% { text-shadow: 0.05em 0 0 #00ff00; } 15% { text-shadow: -0.05em -0.025em 0 #ff0000; } 49% { text-shadow: -0.05em -0.025em 0 #ff0000; } 50% { text-shadow: 0.025em 0.05em 0 #0000ff; } 99% { text-shadow: 0.025em 0.05em 0 #0000ff; } 100% { text-shadow: -0.025em 0 0 #00ff00; } }
 
-        .search-box {
-            background: #000; border: 1px solid #555; border-radius: 4px;
-            padding: 5px 12px; width: 280px; display: none; align-items: center;
+        .btn-bypass {
+            background: transparent; border: 2px solid #00ff00; color: #00ff00;
+            padding: 15px 40px; font-size: 18px; font-family: 'Courier New', monospace;
+            cursor: pointer; margin-top: 30px; transition: 0.3s; text-transform: uppercase;
         }
-        @media (min-width: 800px) { .search-box { display: flex; } }
-        .search-input { background: transparent; border: none; color: #ccc; font-size: 13px; width: 100%; outline: none; }
+        .btn-bypass:hover { background: #00ff00; color: #000; box-shadow: 0 0 20px #00ff00; }
 
-        .h-icon-r { width: 20px; margin-left: 16px; cursor: pointer; filter: invert(1); opacity: 0.7; }
-        .robux-container { display: flex; align-items: center; margin-left: 12px; cursor: pointer; }
-        .robux-icon { width: 18px; filter: invert(1); }
-        .robux-amt { font-size: 13px; font-weight: bold; margin-left: 4px; }
-
-        /* SIDEBAR SYSTEM */
-        .sidebar {
-            width: 48px; background: var(--rbx-header); height: 100%;
-            position: fixed; top: 40px; left: 0; border-right: 1px solid var(--rbx-nav);
-            display: flex; flex-direction: column; align-items: center; padding-top: 15px; z-index: 9000;
-        }
-        .s-item { width: 24px; margin-bottom: 28px; filter: invert(1); opacity: 0.6; cursor: pointer; transition: 0.2s; }
-        .s-item:hover { opacity: 1; transform: scale(1.1); }
-
-        /* MAIN VIEWPORT */
-        main {
-            margin-left: 48px; padding: 55px 20px 20px 20px;
-            height: calc(100vh - 40px); overflow-y: auto; scroll-behavior: smooth;
-        }
-
-        .greet { font-size: 24px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
-
-        /* GAME GRID LOGIC */
-        .grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-            gap: 15px; margin-bottom: 40px;
-        }
-        .game-card {
-            background: #232527; border-radius: 8px; overflow: hidden;
-            cursor: pointer; transition: transform 0.2s, background 0.2s;
-        }
-        .game-card:hover { transform: translateY(-4px); background: #2a2c2e; }
-        .thumb { width: 100%; aspect-ratio: 1/1; background-size: cover; background-position: center; }
-        .info { padding: 10px; }
-        .title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
-        .stats { font-size: 11px; color: var(--rbx-text-sec); display: flex; align-items: center; }
-        .rating-icon { width: 12px; margin-right: 4px; filter: invert(1); opacity: 0.5; }
-
-        /* THE ENGINE LAYER */
-        #rbx-frame {
-            display: none; position: fixed; top: 0; left: 0; 
-            width: 100%; height: 100%; border: none; z-index: 20000;
-            background: #000;
-        }
-        .close-btn {
-            position: fixed; top: 12px; left: 12px; z-index: 21000;
-            background: rgba(0,0,0,0.7); color: white; border: 1px solid #444;
-            padding: 6px 15px; border-radius: 4px; font-size: 12px; font-weight: bold;
-            cursor: pointer; display: none; text-transform: uppercase;
-        }
-
-        /* LOADING SYSTEM */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #1B1D1E; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 30000;
-        }
-        .l-logo { width: 80px; margin-bottom: 20px; animation: pulse 2s infinite; }
-        .l-text { font-size: 14px; color: #fff; font-weight: 500; margin-top: 10px; }
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        #game-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 9999; }
+        .back-btn { position: fixed; top: 10px; right: 10px; z-index: 10000; background: #ff0000; color: white; border: none; padding: 5px 10px; cursor: pointer; display: none; }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="l-logo">
-        <div class="l-text">СИНХРОНИЗАЦИЯ С СЕРВЕРАМИ ROBLOX...</div>
-        <div style="font-size: 10px; color: #555; margin-top: 5px;">NAUMOV ENGINE v23.0 | BYPASS ACTIVE</div>
+<div id="terminal">
+    <div class="glitch">ROBLOX BYPASS</div>
+    <p style="margin-top: 20px;">[ SYSTEM: ONLINE ]</p>
+    <p id="status">> WAITING FOR SELECTION...</p>
+    
+    <button class="btn-bypass" onclick="startBypass()">ACTIVATE TUNNEL</button>
+    
+    <div style="margin-top: 50px; color: #444; font-size: 10px;">
+        NODE: IL-NAUMOV-410<br>
+        STATUS: NO-VPN ENCRYPTION ACTIVE
     </div>
+</div>
 
-    <header>
-        <div class="h-left">
-            <img src="https://cdn-icons-png.flaticon.com/512/561/561184.png" class="m-icon">
-            <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="rbx-logo">
-            <div class="nav-links">
-                <a href="#" class="nav-link">Discover</a>
-                <a href="#" class="nav-link">Avatar Shop</a>
-                <a href="#" class="nav-link">Create</a>
-            </div>
-        </div>
-        <div class="h-center">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search for games...">
-            </div>
-        </div>
-        <div class="h-right">
-            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" class="h-icon-r">
-            <img src="https://cdn-icons-png.flaticon.com/512/3114/3114812.png" class="h-icon-r">
-            <div class="robux-container" onclick="openGame()">
-                <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" class="robux-icon">
-                <span class="robux-amt">999K+</span>
-            </div>
-        </div>
-    </header>
+<button class="back-btn" id="back" onclick="stopBypass()">EXIT</button>
+<iframe id="game-window" src=""></iframe>
 
-    <div class="sidebar">
-        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" class="s-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" class="s-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/2541/2541991.png" class="s-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/933/933310.png" class="s-item">
-    </div>
-
-    <main id="main-content">
-        <div class="greet">Home</div>
+<script>
+    function startBypass() {
+        const status = document.getElementById('status');
+        const frame = document.getElementById('game-window');
+        const back = document.getElementById('back');
         
-        <div class="grid" id="game-grid">
-            </div>
-    </main>
-
-    <button class="close-btn" id="close" onclick="closeGame()">← Back to Home</button>
-    <iframe id="rbx-frame" src="" allow="autoplay; camera; microphone; fullscreen; clipboard-read; clipboard-write;"></iframe>
-
-    <script>
-        // БАЗА ДАННЫХ ИГР (СИМУЛЯЦИЯ ОГРОМНОГО КАТАЛОГА)
-        const games = [
-            { t: "Blox Fruits", i: "https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png", p: "98%" },
-            { t: "Brookhaven 🏡RP", i: "https://tr.rbxcdn.com/83e877864f1bc6e371a5c68b753a4835/420/420/Image/Png", p: "92%" },
-            { t: "Adopt Me!", i: "https://tr.rbxcdn.com/725841071d0e14a275466c4349341775/420/420/Image/Png", p: "89%" },
-            { t: "BedWars", i: "https://tr.rbxcdn.com/463f822e6b772e08e624c4e7456d616d/420/420/Image/Png", p: "94%" },
-            { t: "Doors 👁️", i: "https://tr.rbxcdn.com/5028c21a48e77c5957d0f9468006e897/420/420/Image/Png", p: "96%" },
-            { t: "Murder Mystery 2", i: "https://tr.rbxcdn.com/16766487968593467645/420/420/Image/Png", p: "91%" },
-            { t: "Pet Simulator 99!", i: "https://tr.rbxcdn.com/21746270554271842845/420/420/Image/Png", p: "95%" },
-            { t: "All Star Tower Defense", i: "https://tr.rbxcdn.com/178553254245674253/420/420/Image/Png", p: "88%" }
-        ];
-
-        const grid = document.getElementById('game-grid');
+        status.innerText = "> INJECTING SCRIPTS...";
         
-        // Генерация интерфейса
-        games.forEach(g => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.onclick = openGame;
-            card.innerHTML = `
-                <div class="thumb" style="background-image: url('${g.i}')"></div>
-                <div class="info">
-                    <div class="title">${g.t}</div>
-                    <div class="stats">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" class="rating-icon">
-                        ${g.p}
-                    </div>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
+        setTimeout(() => {
+            status.innerText = "> BYPASSING FIREWALL...";
+        }, 1000);
 
-        // ЛОГИКА ДВИЖКА
-        function openGame() {
-            const frame = document.getElementById('rbx-frame');
-            const close = document.getElementById('close');
-            
-            // Мы используем облачную ноду, которая содержит ВЕСЬ роблокс
+        setTimeout(() => {
+            status.innerText = "> LOADING CLOUD ENGINE...";
+            // Это ссылка на облачную версию, которая работает везде
             frame.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
             frame.style.display = "block";
-            close.style.display = "block";
-        }
+            back.style.display = "block";
+        }, 2000);
+    }
 
-        function closeGame() {
-            const frame = document.getElementById('rbx-frame');
-            const close = document.getElementById('close');
-            frame.src = "";
-            frame.style.display = "none";
-            close.style.display = "none";
-        }
+    function stopBypass() {
+        location.reload();
+    }
+</script>
 
-        // Завершение загрузки
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-            }, 3000);
-        };
-    </script>
 </body>
 </html>
