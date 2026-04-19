@@ -2,90 +2,51 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Roblox</title>
     <link rel="icon" href="https://www.roblox.com/favicon.ico">
     <style>
-        /* Огромный блок стилей для точного копирования */
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #1B1D1E; overflow: hidden; font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #1B1D1E; overflow: hidden; }
         
-        #main-container { position: relative; width: 100%; height: 100%; }
-
-        /* Кастомный экран загрузки "как в оригинале" */
-        #rbx-loader {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        /* Твоя заставка - в точности как у РБ */
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #232527; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 10000;
+            align-items: center; justify-content: center; z-index: 9999;
         }
-        .rbx-logo-static { width: 60px; height: 60px; margin-bottom: 25px; }
-        .spinner-rbx { width: 34px; height: 34px; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #FFFFFF; border-radius: 50%; animation: rbx-spin 0.8s linear infinite; }
-        @keyframes rbx-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .rbx-logo { width: 75px; height: 75px; margin-bottom: 25px; }
+        .spin { width: 35px; height: 35px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #fff; border-radius: 50%; animation: s 1s linear infinite; }
+        @keyframes s { to { transform: rotate(360deg); } }
 
-        /* Контейнер для игрового движка */
-        #viewport { width: 100%; height: 100%; border: none; outline: none; background: #000; }
-
-        /* Верхняя панель "фейк", чтобы скрыть адрес прокси */
-        .header-mask {
-            position: absolute; top: 0; width: 100%; height: 5px; 
-            background: #232527; z-index: 9999;
+        /* САМОЕ ВАЖНОЕ: Открываем чистый домен РБ */
+        #game-view {
+            width: 100%; height: 100%; border: none;
+            position: absolute; top: 0; left: 0;
+            display: block;
         }
     </style>
 </head>
 <body>
 
-<div id="main-container">
-    <div class="header-mask"></div>
-    
-    <div id="rbx-loader">
-        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="rbx-logo-static" alt="Roblox">
-        <div class="spinner-rbx"></div>
-        <div style="color: #FFFFFF; margin-top: 20px; font-weight: 500; font-size: 15px;">Загрузка Roblox...</div>
-        <div id="status-log" style="color: #666; font-size: 10px; margin-top: 10px; font-family: monospace;">CONNECTING TO SECURE_NODE_RU...</div>
+    <div id="loading-screen">
+        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="rbx-logo">
+        <div class="spin"></div>
+        <p style="color: white; font-family: sans-serif; margin-top: 20px; font-weight: bold; letter-spacing: 1px;">NAUMOV ENGINE</p>
     </div>
 
-    <iframe id="viewport" src="about:blank" allow="autoplay; camera; microphone; clipboard-read; clipboard-write; fullscreen;"></iframe>
-</div>
+    <iframe id="game-view" src="https://www.roblox.com/home"></iframe>
 
-<script>
-    // Массив резервных путей обхода
-    const nodes = [
-        "https://blockaway.net/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome",
-        "https://www.croxyproxy.com/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome"
-    ];
+    <script>
+        const frame = document.getElementById('game-view');
+        const loader = document.getElementById('loading-screen');
 
-    const frame = document.getElementById('viewport');
-    const loader = document.getElementById('rbx-loader');
-    const log = document.getElementById('status-log');
-
-    // Логика запуска "огромного" скрипта
-    function initBypass() {
-        log.innerText = "> INITIALIZING MIRROR ENGINE...";
-        
-        setTimeout(() => {
-            log.innerText = "> BYPASSING FILTERS [100%]";
-            // Выбираем самый стабильный узел
-            frame.src = nodes[0];
-        }, 1500);
-
-        // Убираем загрузку только когда сайт реально ответит
+        // Скрываем заставку только когда Роблокс загрузится
         frame.onload = function() {
-            log.innerText = "> FINALIZING UI...";
             setTimeout(() => {
-                loader.style.transition = "opacity 0.8s";
-                loader.style.opacity = "0";
-                setTimeout(() => { loader.style.display = "none"; }, 800);
-            }, 1000);
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 1500);
         };
-    }
-
-    // Старт системы
-    window.onload = initBypass;
-
-    // Защита от вылета (если прокси попытается нас перекинуть)
-    window.onbeforeunload = function() {
-        return "Вы уверены, что хотите выйти из Roblox?";
-    };
-</script>
-
+    </script>
 </body>
 </html>
