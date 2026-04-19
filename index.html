@@ -2,68 +2,96 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Naumov Bypass v27.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Game & Wiki Portal</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; overflow: hidden; }
+        :root { --rbx-bg: #1B1D1E; --rbx-card: #232527; --rbx-blue: #00A2FF; }
+        body { margin: 0; background: var(--rbx-bg); color: white; font-family: 'Segoe UI', sans-serif; }
         
-        #terminal { padding: 20px; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        header { background: var(--rbx-card); padding: 15px; border-bottom: 1px solid #393B3D; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .logo { height: 25px; cursor: pointer; }
+
+        .container { padding: 20px; max-width: 1200px; margin: auto; }
+        .wiki-section { margin-bottom: 40px; }
+        h2 { border-left: 4px solid var(--rbx-blue); padding-left: 15px; }
+
+        /* СЕТКА ИГР */
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .game-card { background: var(--rbx-card); border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
+        .game-card:hover { transform: translateY(-5px); border-color: var(--rbx-blue); }
+        .game-img { width: 100%; height: 160px; background-size: cover; background-position: center; }
+        .game-info { padding: 15px; }
+        .hack-list { font-size: 13px; color: #ADB0B1; padding-left: 20px; margin: 10px 0; }
         
-        .glitch { font-size: 30px; font-weight: bold; text-transform: uppercase; position: relative; text-shadow: 0.05em 0 0 #00ff00, -0.025em -0.05em 0 #ff0000, 0.025em 0.05em 0 #0000ff; animation: glitch 1s infinite; }
-        @keyframes glitch { 0% { text-shadow: 0.05em 0 0 #00ff00; } 14% { text-shadow: 0.05em 0 0 #00ff00; } 15% { text-shadow: -0.05em -0.025em 0 #ff0000; } 49% { text-shadow: -0.05em -0.025em 0 #ff0000; } 50% { text-shadow: 0.025em 0.05em 0 #0000ff; } 99% { text-shadow: 0.025em 0.05em 0 #0000ff; } 100% { text-shadow: -0.025em 0 0 #00ff00; } }
+        .play-btn { background: var(--rbx-blue); color: white; border: none; width: 100%; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-        .btn-bypass {
-            background: transparent; border: 2px solid #00ff00; color: #00ff00;
-            padding: 15px 40px; font-size: 18px; font-family: 'Courier New', monospace;
-            cursor: pointer; margin-top: 30px; transition: 0.3s; text-transform: uppercase;
-        }
-        .btn-bypass:hover { background: #00ff00; color: #000; box-shadow: 0 0 20px #00ff00; }
-
-        #game-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 9999; }
-        .back-btn { position: fixed; top: 10px; right: 10px; z-index: 10000; background: #ff0000; color: white; border: none; padding: 5px 10px; cursor: pointer; display: none; }
+        /* ОКНО ИГРЫ */
+        #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .stop-btn { position: fixed; top: 10px; left: 10px; z-index: 1100; background: #ff0000; color: white; border: none; padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
-<div id="terminal">
-    <div class="glitch">ROBLOX BYPASS</div>
-    <p style="margin-top: 20px;">[ SYSTEM: ONLINE ]</p>
-    <p id="status">> WAITING FOR SELECTION...</p>
-    
-    <button class="btn-bypass" onclick="startBypass()">ACTIVATE TUNNEL</button>
-    
-    <div style="margin-top: 50px; color: #444; font-size: 10px;">
-        NODE: IL-NAUMOV-410<br>
-        STATUS: NO-VPN ENCRYPTION ACTIVE
-    </div>
+<header>
+    <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo">
+    <div style="font-size: 14px; font-weight: bold;">WIKI & PLAY PORTAL</div>
+</header>
+
+<div class="container">
+    <section class="wiki-section">
+        <h2>Лайфхаки для твоих игр</h2>
+        <div class="game-grid">
+            
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png');"></div>
+                <div class="game-info">
+                    <h3>Racing Simulator</h3>
+                    <ul class="hack-list">
+                        <li>Как заработать: Используй таймер круга для бонуса x2.</li>
+                        <li>Скрипт: <code>player.leaderstats.Money.Value += 100</code></li>
+                        <li>Секрет: В горах есть скрытый трамплин.</li>
+                    </ul>
+                    <button class="play-btn" onclick="startApp()">ИГРАТЬ</button>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/5028c21a48e77c5957d0f9468006e897/420/420/Image/Png');"></div>
+                <div class="game-info">
+                    <h3>Studio Hacks</h3>
+                    <ul class="hack-list">
+                        <li>Лайфхак: Как сделать кнопку «Log In» рабочей.</li>
+                        <li>Совет: Используй RemoteEvents для передачи данных.</li>
+                        <li>Дизайн: LED-подсветка в комнате ускоряет код!</li>
+                    </ul>
+                    <button class="play-btn" onclick="startApp()">ИГРАТЬ</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
 </div>
 
-<button class="back-btn" id="back" onclick="stopBypass()">EXIT</button>
-<iframe id="game-window" src=""></iframe>
+<div id="game-overlay">
+    <button class="stop-btn" onclick="stopApp()">СТОП (ВЫХОД)</button>
+    <iframe id="rbx-engine" src=""></iframe>
+</div>
 
 <script>
-    function startBypass() {
-        const status = document.getElementById('status');
-        const frame = document.getElementById('game-window');
-        const back = document.getElementById('back');
-        
-        status.innerText = "> INJECTING SCRIPTS...";
-        
-        setTimeout(() => {
-            status.innerText = "> BYPASSING FIREWALL...";
-        }, 1000);
-
-        setTimeout(() => {
-            status.innerText = "> LOADING CLOUD ENGINE...";
-            // Это ссылка на облачную версию, которая работает везде
-            frame.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
-            frame.style.display = "block";
-            back.style.display = "block";
-        }, 2000);
+    function startApp() {
+        const overlay = document.getElementById('game-overlay');
+        const engine = document.getElementById('rbx-engine');
+        // Запуск через стабильное облако (все игры внутри)
+        engine.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
+        overlay.style.display = "block";
     }
 
-    function stopBypass() {
-        location.reload();
+    function stopApp() {
+        const overlay = document.getElementById('game-overlay');
+        const engine = document.getElementById('rbx-engine');
+        engine.src = "";
+        overlay.style.display = "none";
     }
 </script>
 
