@@ -2,40 +2,98 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Roblox Launcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox</title>
     <link rel="icon" href="https://www.roblox.com/favicon.ico">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #1B1D1E; color: white; font-family: sans-serif; overflow: hidden; }
-        #launcher { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; background: radial-gradient(circle, #252728 0%, #1B1D1E 100%); }
-        .logo { width: 80px; margin-bottom: 25px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
-        .btn-play { background: #FFFFFF; color: #000000; border: none; padding: 18px 60px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-play:hover { background: #f0f0f0; transform: scale(1.02); }
-        .footer { position: absolute; bottom: 20px; font-size: 10px; color: #555; letter-spacing: 2px; }
-        #game-box { width: 100%; height: 100%; display: none; border: none; }
+        body, html { margin: 0; padding: 0; background: #1B1D1E; color: #FFFFFF; font-family: 'HCo Gotham SSm', sans-serif; overflow-x: hidden; }
+        
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        header {
+            background: #232527; height: 60px; display: flex; align-items: center;
+            padding: 0 20px; position: fixed; width: 100%; z-index: 100; border-bottom: 1px solid #393B3D;
+        }
+        .logo { height: 30px; margin-right: 20px; cursor: pointer; }
+        .nav-item { margin: 0 15px; font-weight: 500; font-size: 16px; color: #BBB; cursor: pointer; display: none; }
+        @media (min-width: 800px) { .nav-item { display: block; } }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        main { padding: 80px 20px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 28px; margin-bottom: 20px; }
+
+        /* ПЛИТКИ ИГР */
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+        .game-card { background: #232527; border-radius: 8px; overflow: hidden; cursor: pointer; transition: 0.2s; }
+        .game-card:hover { transform: translateY(-5px); }
+        .game-img { width: 100%; aspect-ratio: 1/1; background-size: cover; background-position: center; }
+        .game-info { padding: 10px; }
+        .game-title { font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* КНОПКА ЗАПУСКА */
+        .play-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: none; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 1000;
+        }
+        .start-btn {
+            background: #00A2FF; color: white; border: none; padding: 15px 50px;
+            font-size: 20px; font-weight: bold; border-radius: 5px; cursor: pointer;
+        }
+
+        iframe { width: 100%; height: 100%; border: none; display: none; position: fixed; top: 0; left: 0; z-index: 2000; }
     </style>
 </head>
 <body>
 
-    <div id="launcher">
+    <header>
         <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo">
-        <h1 style="margin-bottom: 40px; font-weight: 500;">ROBLOX</h1>
-        <button class="btn-play" onclick="launchGame()">Играть</button>
-        <div class="footer">NAUMOV PRIVATE SYSTEM v18.0</div>
+        <div class="nav-item">Discover</div>
+        <div class="nav-item">Avatar Shop</div>
+        <div class="nav-item">Create</div>
+        <div class="nav-item">Robux</div>
+    </header>
+
+    <main>
+        <h2>Home</h2>
+        <div class="game-grid">
+            <div class="game-card" onclick="openGame()">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png');"></div>
+                <div class="game-info"><div class="game-title">Blox Fruits</div></div>
+            </div>
+            <div class="game-card" onclick="openGame()">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/83e877864f1bc6e371a5c68b753a4835/420/420/Image/Png');"></div>
+                <div class="game-info"><div class="game-title">Brookhaven 🏡RP</div></div>
+            </div>
+            <div class="game-card" onclick="openGame()">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/725841071d0e14a275466c4349341775/420/420/Image/Png');"></div>
+                <div class="game-info"><div class="game-title">Adopt Me!</div></div>
+            </div>
+            <div class="game-card" onclick="openGame()">
+                <div class="game-img" style="background-image: url('https://tr.rbxcdn.com/463f822e6b772e08e624c4e7456d616d/420/420/Image/Png');"></div>
+                <div class="game-info"><div class="game-title">BedWars</div></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="play-overlay" id="overlay">
+        <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" style="width: 100px; margin-bottom: 30px;">
+        <button class="start-btn" onclick="launch()">Play in Browser</button>
+        <p style="margin-top: 20px; color: #888;">Secure Tunnel v19.0</p>
     </div>
 
-    <iframe id="game-box" src=""></iframe>
+    <iframe id="engine" src=""></iframe>
 
     <script>
-        function launchGame() {
-            const l = document.getElementById('launcher');
-            const g = document.getElementById('game-box');
-            
-            l.style.display = 'none';
-            g.style.display = 'block';
-            
-            // Используем защищенный "облачный" шлюз, который открывает РБ без ВПН
-            g.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
+        function openGame() {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function launch() {
+            const frame = document.getElementById('engine');
+            document.getElementById('overlay').style.display = 'none';
+            frame.style.display = 'block';
+            // Самый мощный обход
+            frame.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
         }
     </script>
 </body>
