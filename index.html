@@ -6,126 +6,124 @@
     <title>Roblox</title>
     <link rel="icon" href="https://www.roblox.com/favicon.ico">
     <style>
-        /* ОГРОМНЫЙ БЛОК СТИЛЕЙ ДЛЯ КОПИИ 1 В 1 */
-        :root { --rbx-header: #232527; --rbx-bg: #1B1D1E; --rbx-text: #FFFFFF; --rbx-secondary: #ADB0B1; }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--rbx-bg); color: var(--rbx-text); font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, sans-serif; overflow: hidden; }
+        /* ПОЛНОЕ КОПИРОВАНИЕ ДИЗАЙНА ROBLOX DARK MODE */
+        :root {
+            --header-height: 40px;
+            --bg-color: #1B1D1E;
+            --header-color: #232527;
+            --text-color: #FFFFFF;
+            --secondary-text: #ADB0B1;
+            --divider: #393B3D;
+        }
 
-        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg-color); color: var(--text-color); font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, sans-serif; overflow: hidden; }
+
+        /* ВЕРХНЯЯ ПАНЕЛЬ - КОПИЯ 1:1 */
         header {
-            background: var(--rbx-header); height: 40px; display: flex; align-items: center;
-            justify-content: space-between; padding: 0 15px; border-bottom: 1px solid #393B3D; position: fixed; width: 100%; z-index: 1000;
+            background: var(--header-color); height: var(--header-height); display: flex; align-items: center;
+            justify-content: space-between; padding: 0 12px; border-bottom: 1px solid var(--divider); position: fixed; width: 100%; z-index: 1000;
         }
-        .left-h, .right-h { display: flex; align-items: center; }
-        .menu-icon { width: 18px; margin-right: 15px; cursor: pointer; opacity: 0.8; }
-        .rbx-logo { height: 22px; cursor: pointer; }
-        .nav-btn { margin-left: 20px; font-size: 14px; font-weight: 500; color: #fff; text-decoration: none; display: none; }
-        @media (min-width: 700px) { .nav-btn { display: block; } }
+        .h-left, .h-right { display: flex; align-items: center; }
+        .burger { width: 18px; cursor: pointer; margin-right: 15px; opacity: 0.9; }
+        .logo-main { height: 20px; cursor: pointer; }
+        .search-bar { background: #000; border: 1px solid #555; border-radius: 4px; padding: 4px 10px; margin-left: 20px; width: 200px; display: none; }
+        @media (min-width: 800px) { .search-bar { display: block; } }
 
-        /* ИКОНКИ СПРАВА */
-        .h-icon { width: 18px; margin-left: 15px; cursor: pointer; opacity: 0.7; }
-        .robux-val { font-size: 13px; font-weight: bold; margin-left: 5px; }
+        /* ИКОНКИ В ПРАВОЙ ЧАСТИ */
+        .h-icon { width: 18px; margin-left: 14px; cursor: pointer; opacity: 0.8; }
+        .robux-count { font-size: 13px; font-weight: 700; margin-left: 4px; display: flex; align-items: center; }
 
-        /* БОКОВОЕ МЕНЮ */
-        .sidebar {
-            width: 50px; background: var(--rbx-header); height: calc(100% - 40px);
-            position: fixed; top: 40px; display: flex; flex-direction: column; align-items: center; padding-top: 10px; border-right: 1px solid #393B3D;
+        /* БОКОВАЯ ПАНЕЛЬ */
+        .left-nav {
+            width: 48px; background: var(--header-color); height: 100%;
+            position: fixed; top: var(--header-height); display: flex; flex-direction: column; align-items: center; padding-top: 12px; border-right: 1px solid var(--divider);
         }
-        .side-item { width: 24px; height: 24px; margin-bottom: 25px; opacity: 0.6; cursor: pointer; }
+        .nav-link { width: 22px; margin-bottom: 24px; opacity: 0.65; cursor: pointer; }
+        .nav-link:hover { opacity: 1; }
 
-        /* ОСНОВНАЯ СЕТКА ИГР */
-        main { margin-left: 60px; padding-top: 55px; height: calc(100vh - 55px); overflow-y: auto; padding-right: 15px; }
-        .section-title { font-size: 18px; font-weight: bold; margin: 15px 0; }
-        .game-card {
-            background: #232527; border-radius: 8px; width: 140px; display: inline-block;
-            margin-right: 12px; margin-bottom: 20px; cursor: pointer; transition: 0.2s;
-        }
-        .game-card:hover { transform: scale(1.03); }
-        .g-thumb { width: 140px; height: 140px; border-radius: 8px 8px 0 0; background-size: cover; }
-        .g-name { padding: 8px; font-size: 12px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        /* КОНТЕНТ С ИГРАМИ */
+        main { margin-left: 48px; padding: 55px 20px 20px; height: 100vh; overflow-y: auto; box-sizing: border-box; }
+        .user-greet { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+        .grid-games { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .card { background: #232527; border-radius: 6px; cursor: pointer; transition: 0.15s; }
+        .card:hover { background: #2a2c2e; transform: translateY(-2px); }
+        .card-img { width: 100%; aspect-ratio: 1/1; border-radius: 6px 6px 0 0; background-size: cover; background-position: center; }
+        .card-title { padding: 6px 8px; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* ОКНО ИГРЫ (ОТКРЫВАЕТСЯ ПРИ КЛИКЕ) */
-        #game-engine {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 9999; border: none; background: #000;
-        }
-        .close-game {
-            position: fixed; top: 10px; right: 10px; z-index: 10000; background: rgba(0,0,0,0.5);
-            color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none;
-        }
+        /* ИГРОВОЙ ДВИЖОК */
+        #viewport { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 5000; border: none; background: #000; }
+        .exit-btn { position: fixed; top: 8px; left: 8px; z-index: 6000; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid #666; padding: 4px 12px; border-radius: 4px; font-size: 12px; display: none; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="left-h">
-            <img src="https://static.thenounproject.com/png/3635145-200.png" class="menu-icon" style="filter: invert(1);">
-            <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="rbx-logo">
-            <a href="#" class="nav-btn">Discover</a>
-            <a href="#" class="nav-btn">Avatar Shop</a>
-            <a href="#" class="nav-btn">Create</a>
+        <div class="h-left">
+            <img src="https://static.thenounproject.com/png/3635145-200.png" class="burger" style="filter: invert(1);">
+            <img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo-main">
+            <div class="search-bar" style="color: #666; font-size: 13px;">Search</div>
         </div>
-        <div class="right-h">
+        <div class="h-right">
             <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" class="h-icon" style="filter: invert(1);">
             <img src="https://cdn-icons-png.flaticon.com/512/3114/3114812.png" class="h-icon" style="filter: invert(1);">
-            <div class="right-h" onclick="startApp()">
+            <div style="display: flex; align-items: center;" onclick="runRbx()">
                 <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" class="h-icon" style="filter: invert(1);">
-                <span class="robux-val">999K+</span>
+                <span class="robux-count">999K+</span>
             </div>
         </div>
     </header>
 
-    <div class="sidebar">
-        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" class="side-item" style="filter: invert(1);">
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" class="side-item" style="filter: invert(1);">
-        <img src="https://cdn-icons-png.flaticon.com/512/2541/2541991.png" class="side-item" style="filter: invert(1);">
+    <div class="left-nav">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" class="nav-link" style="filter: invert(1);">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" class="nav-link" style="filter: invert(1);">
+        <img src="https://cdn-icons-png.flaticon.com/512/2541/2541991.png" class="nav-link" style="filter: invert(1);">
+        <img src="https://cdn-icons-png.flaticon.com/512/933/933310.png" class="nav-link" style="filter: invert(1);">
     </div>
 
-    <main id="home-view">
-        <div class="section-title">Home</div>
-        <div class="game-card" onclick="startApp()">
-            <div class="g-thumb" style="background-image: url('https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png');"></div>
-            <div class="g-name">Blox Fruits</div>
-        </div>
-        <div class="game-card" onclick="startApp()">
-            <div class="g-thumb" style="background-image: url('https://tr.rbxcdn.com/83e877864f1bc6e371a5c68b753a4835/420/420/Image/Png');"></div>
-            <div class="g-name">Brookhaven 🏡RP</div>
-        </div>
-        <div class="game-card" onclick="startApp()">
-            <div class="g-thumb" style="background-image: url('https://tr.rbxcdn.com/725841071d0e14a275466c4349341775/420/420/Image/Png');"></div>
-            <div class="g-name">Adopt Me!</div>
-        </div>
+    <main>
+        <div class="user-greet">Home</div>
         
-        <div class="section-title">Recommended for You</div>
-        <div class="game-card" onclick="startApp()">
-            <div class="g-thumb" style="background-image: url('https://tr.rbxcdn.com/463f822e6b772e08e624c4e7456d616d/420/420/Image/Png');"></div>
-            <div class="g-name">BedWars</div>
-        </div>
-        <div class="game-card" onclick="startApp()">
-            <div class="g-thumb" style="background-image: url('https://tr.rbxcdn.com/5028c21a48e77c5957d0f9468006e897/420/420/Image/Png');"></div>
-            <div class="g-name">Doors 👁️</div>
+        <div class="grid-games">
+            <div class="card" onclick="runRbx()">
+                <div class="card-img" style="background-image: url('https://tr.rbxcdn.com/1b13197177519659b854378f48b111a4/420/420/Image/Png');"></div>
+                <div class="card-title">Blox Fruits</div>
+            </div>
+            <div class="card" onclick="runRbx()">
+                <div class="card-img" style="background-image: url('https://tr.rbxcdn.com/83e877864f1bc6e371a5c68b753a4835/420/420/Image/Png');"></div>
+                <div class="card-title">Brookhaven 🏡RP</div>
+            </div>
+            <div class="card" onclick="runRbx()">
+                <div class="card-img" style="background-image: url('https://tr.rbxcdn.com/725841071d0e14a275466c4349341775/420/420/Image/Png');"></div>
+                <div class="card-title">Adopt Me!</div>
+            </div>
+            <div class="card" onclick="runRbx()">
+                <div class="card-img" style="background-image: url('https://tr.rbxcdn.com/463f822e6b772e08e624c4e7456d616d/420/420/Image/Png');"></div>
+                <div class="card-title">BedWars</div>
+            </div>
+             <div class="card" onclick="runRbx()">
+                <div class="card-img" style="background-image: url('https://tr.rbxcdn.com/5028c21a48e77c5957d0f9468006e897/420/420/Image/Png');"></div>
+                <div class="card-title">Doors 👁️</div>
+            </div>
         </div>
     </main>
 
-    <button class="close-game" id="close" onclick="closeApp()">EXIT</button>
-    <iframe id="game-engine" src=""></iframe>
+    <button class="exit-btn" id="ex-b" onclick="stopRbx()">Home</button>
+    <iframe id="viewport" src=""></iframe>
 
     <script>
-        function startApp() {
-            const engine = document.getElementById('game-engine');
-            const closeBtn = document.getElementById('close');
-            
-            // Запуск оригинального облачного Роблокса
-            engine.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
-            engine.style.display = "block";
-            closeBtn.style.display = "block";
+        function runRbx() {
+            const v = document.getElementById('viewport');
+            const b = document.getElementById('ex-b');
+            v.src = "https://nowgg.lol/play/roblox-corporation/5349/roblox";
+            v.style.display = "block";
+            b.style.display = "block";
         }
-
-        function closeApp() {
-            const engine = document.getElementById('game-engine');
-            const closeBtn = document.getElementById('close');
-            engine.src = "";
-            engine.style.display = "none";
-            closeBtn.style.display = "none";
+        function stopRbx() {
+            const v = document.getElementById('viewport');
+            const b = document.getElementById('ex-b');
+            v.src = "";
+            v.style.display = "none";
+            b.style.display = "none";
         }
     </script>
 </body>
