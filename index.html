@@ -3,52 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAUMOV VPN ULTIMATE</title>
+    <title>NAUMOV VPN PRO</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #00ff88; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
-        #launcher { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; background: radial-gradient(circle, #111 0%, #000 100%); }
-        .vpn-card { border: 2px solid #00ff88; padding: 40px; border-radius: 30px; background: rgba(10, 10, 10, 0.9); box-shadow: 0 0 70px rgba(0, 255, 136, 0.2); width: 300px; }
-        .key-glow { font-size: 60px; margin-bottom: 20px; text-shadow: 0 0 20px #00ff88; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-        .connect-btn { background: #00ff88; color: #000; border: none; padding: 20px; width: 100%; border-radius: 15px; font-weight: bold; font-size: 18px; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4); }
-        .status { margin-top: 20px; font-family: monospace; font-size: 12px; color: #00ff88; height: 20px; }
-        #game-frame { width: 100%; height: 100%; border: none; display: none; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #00ff88; font-family: 'Courier New', monospace; overflow: hidden; }
+        #interface { display: flex; align-items: center; justify-content: center; height: 100vh; transition: 0.5s; }
+        .vpn-hub { border: 3px solid #00ff88; padding: 40px; border-radius: 25px; background: #0a0a0a; text-align: center; box-shadow: 0 0 50px rgba(0, 255, 136, 0.3); width: 320px; }
+        .key-glow { font-size: 50px; margin-bottom: 20px; text-shadow: 0 0 20px #00ff88; }
+        .btn-connect { background: #00ff88; color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4); }
+        .btn-connect:hover { background: #fff; transform: translateY(-2px); }
+        .loader { display: none; margin-top: 25px; }
+        .progress-bg { width: 100%; height: 8px; background: #111; border-radius: 4px; border: 1px solid #00ff88; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0%; background: #00ff88; transition: 7s linear; }
+        #game-window { width: 100%; height: 100%; border: none; display: none; }
+        .log { font-size: 10px; margin-top: 10px; color: #00ff88; height: 15px; }
     </style>
 </head>
 <body>
 
-    <div id="launcher">
-        <div class="vpn-card">
+    <div id="interface">
+        <div class="vpn-hub">
             <div class="key-glow">🔑</div>
-            <h1 style="letter-spacing: 5px; margin: 0;">NAUMOV</h1>
-            <p style="color: #555; font-size: 12px; margin-bottom: 30px;">PRIVATE BYPASS SERVER</p>
-            <button class="connect-btn" onclick="runVPN()">ВКЛЮЧИТЬ VPN</button>
-            <div class="status" id="st">READY TO CONNECT</div>
+            <h1 style="margin: 0; font-size: 24px;">NAUMOV VPN</h1>
+            <p style="color: #444; font-size: 12px; margin-bottom: 25px;">STATUS: ENCRYPTED</p>
+            
+            <button class="btn-connect" onclick="activate()">ПОДКЛЮЧИТЬ</button>
+            
+            <div class="loader" id="loader">
+                <div class="progress-bg"><div class="progress-bar" id="bar"></div></div>
+                <div class="log" id="log">INIT...</div>
+            </div>
         </div>
     </div>
 
-    <iframe id="game-frame" src=""></iframe>
+    <iframe id="game-window" src=""></iframe>
 
     <script>
-        function runVPN() {
-            const st = document.getElementById('st');
-            const btn = document.querySelector('.connect-btn');
-            const frame = document.getElementById('game-frame');
-            const launcher = document.getElementById('launcher');
+        function activate() {
+            const btn = document.querySelector('.btn-connect');
+            const loader = document.getElementById('loader');
+            const bar = document.getElementById('bar');
+            const log = document.getElementById('log');
+            const ifr = document.getElementById('game-window');
+            const ui = document.getElementById('interface');
 
             btn.style.display = 'none';
-            st.innerText = "> INITIALIZING SECURE TUNNEL...";
-            
-            setTimeout(() => { st.innerText = "> CONNECTING TO MINSK_NODE..."; }, 2000);
-            setTimeout(() => { st.innerText = "> BYPASSING FIREWALL... [OK]"; }, 4500);
-            setTimeout(() => { st.innerText = "> LAUNCHING ROBLOX..."; }, 6500);
+            loader.style.display = 'block';
 
+            setTimeout(() => { bar.style.width = '100%'; }, 100);
+
+            // Имитация работы хакерского ВПН
+            setTimeout(() => { log.innerText = "> ПОИСК СЕРВЕРА..."; }, 1500);
+            setTimeout(() => { log.innerText = "> ТУННЕЛЬ ПРОБИТ [BY]..."; }, 4000);
+            setTimeout(() => { log.innerText = "> ЗАПУСК ROBLOX..."; }, 6000);
+
+            // Переход ПРЯМО В ОКНЕ через 7 секунд
             setTimeout(() => {
-                launcher.style.display = 'none';
-                frame.style.display = 'block';
-                // Используем самый стабильный и быстрый метод запуска
-                frame.src = "https://blockaway.net/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome";
-            }, 8000);
+                ui.style.display = 'none';
+                ifr.style.display = 'block';
+                // Тот самый шлюз, который работает внутри твоего сайта
+                ifr.src = "https://www.croxyproxy.com/_ru/_proxy?url=https%3A%2F%2Fwww.roblox.com%2Fhome";
+            }, 7500);
         }
     </script>
 </body>
