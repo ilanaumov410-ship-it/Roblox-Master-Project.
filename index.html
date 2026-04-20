@@ -2,117 +2,81 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naumov Hub | Store & Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UNBLOCKER PORTAL</title>
     <style>
-        :root { 
-            --bg: #1B1D1E; 
-            --card: #232527; 
-            --rbx-blue: #00A2FF; 
-            --rbx-green: #00B06F;
-            --tg-blue: #24A1DE;
+        body, html { margin: 0; padding: 0; height: 100%; background: #0b0b0b; color: white; font-family: sans-serif; overflow: hidden; }
+        
+        /* ГЛАВНОЕ МЕНЮ */
+        #menu {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; gap: 20px; padding: 20px; text-align: center;
         }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'HCo Gotham SSm', sans-serif; scroll-behavior: smooth; }
-        header { background: var(--card); padding: 20px; text-align: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; }
-        .logo { height: 35px; }
-        .nav { display: flex; justify-content: center; gap: 15px; background: #2a2c2e; padding: 12px; font-size: 13px; font-weight: bold; flex-wrap: wrap; }
-        .nav a { color: #aaa; text-decoration: none; padding: 5px 10px; transition: 0.3s; }
-        .nav a:hover { color: white; background: rgba(0,0,0,0.1); border-radius: 5px; }
-        .container { padding: 20px; max-width: 1000px; margin: auto; }
+        h1 { font-size: 24px; letter-spacing: 2px; color: #00A2FF; margin-bottom: 30px; }
 
-        /* SHOP */
-        .section-title { font-size: 24px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--rbx-blue); }
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 50px; }
-        .shop-item { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; transition: 0.3s; }
-        .shop-item:hover { transform: translateY(-5px); border-color: var(--tg-blue); }
-        .shop-item img { width: 45px; margin-bottom: 15px; filter: invert(1); }
-        .price { font-size: 22px; font-weight: 900; color: var(--rbx-green); margin: 10px 0; }
-        .buy-btn { background: var(--tg-blue); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: block; box-sizing: border-box; }
+        .launcher-btn {
+            background: #1c1c1c; border: 1px solid #333; color: #fff; width: 100%; max-width: 350px;
+            padding: 20px; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold;
+            transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 15px;
+        }
+        .launcher-btn:hover { background: #00A2FF; border-color: #fff; transform: scale(1.02); }
+        .launcher-btn img { width: 24px; filter: invert(1); }
 
-        /* WIKI CARDS */
-        .year-label { background: var(--rbx-blue); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; display: inline-block; }
-        .wiki-card { background: var(--card); border-radius: 12px; padding: 20px; border-left: 4px solid var(--rbx-blue); margin-bottom: 15px; }
-        .wiki-card h3 { margin: 0 0 10px 0; font-size: 18px; color: #fff; }
-        .wiki-card p { color: #ADB0B1; font-size: 14px; line-height: 1.5; margin: 0; }
-        .badge { color: var(--rbx-blue); font-weight: bold; }
+        /* ИГРОВОЙ ЭКРАН */
+        #portal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; }
+        iframe { width: 100%; height: 100%; border: none; }
+        
+        .back-btn {
+            position: fixed; top: 10px; left: 10px; z-index: 10001;
+            background: rgba(255, 0, 0, 0.8); color: white; border: none;
+            padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-<header><img src="https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg" class="logo"></header>
+<div id="menu">
+    <h1>BYPASS LAUNCHER v35</h1>
+    
+    <button class="launcher-btn" onclick="openGame('https://nowgg.lol/play/roblox-corporation/5349/roblox')">
+        <img src="https://cdn-icons-png.flaticon.com/512/220/220233.png"> ROBLOX (БЕЗ ВПН)
+    </button>
 
-<div class="nav">
-    <a href="#shop">МАГАЗИН</a>
-    <a href="#y2026">2026</a>
-    <a href="#y2025">2025</a>
-    <a href="#y2024">2024</a>
-    <a href="#y2021">2021-23</a>
+    <button class="launcher-btn" onclick="openGame('https://nowgg.lol/play/supercell/1234/brawl-stars')">
+        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png"> BRAWL STARS
+    </button>
+
+    <button class="launcher-btn" onclick="openGame('https://discord.com/app')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"> DISCORD
+    </button>
+
+    <button class="launcher-btn" onclick="openGame('https://www.tiktok.com/')">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"> TIKTOK (НОВЫЕ ВИДЕО)
+    </button>
+
+    <p style="color: #444; font-size: 11px; margin-top: 50px;">SECURE TUNNEL ACTIVE | GITHUB MIRROR</p>
 </div>
 
-<div class="container">
-    <div id="shop" class="section-title">💰 Купить Робуксы (1₽ = 1R$)</div>
-    <div class="shop-grid">
-        <div class="shop-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
-            <div>100 Robux</div>
-            <div class="price">100₽</div>
-            <a href="https://t.me/BlameJohn2014" class="buy-btn">В ЛИЧКУ ТГ</a>
-        </div>
-        <div class="shop-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
-            <div>500 Robux</div>
-            <div class="price">500₽</div>
-            <a href="https://t.me/BlameJohn2014" class="buy-btn">В ЛИЧКУ ТГ</a>
-        </div>
-        <div class="shop-item" style="border-color: gold;">
-            <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
-            <div>1000 Robux</div>
-            <div class="price">1000₽</div>
-            <a href="https://t.me/BlameJohn2014" class="buy-btn">В ЛИЧКУ ТГ</a>
-        </div>
-    </div>
-
-    <div class="section-title">📖 История и Лайфхаки</div>
-
-    <div class="year-block" id="y2026">
-        <div class="year-label">NEW 2026</div>
-        <div class="wiki-card">
-            <h3>Cyber City RP</h3>
-            <p><span class="badge">[2026]:</span> Чтобы получить секретную машину "Neon Drift", нужно проехать через туннель задом наперед 3 раза.</p>
-        </div>
-    </div>
-
-    <div class="year-block" id="y2025">
-        <div class="year-label">2025</div>
-        <div class="wiki-card">
-            <h3>Grow a Garden Evolution</h3>
-            <p><span class="badge">[2025]:</span> Самый быстрый способ фарма — сажать фиолетовые семена в левом углу карты, там буст x1.5.</p>
-        </div>
-    </div>
-
-    <div class="year-block" id="y2024">
-        <div class="year-label">2024</div>
-        <div class="wiki-card">
-            <h3>Sol's RNG</h3>
-            <p><span class="badge">[2024]:</span> Амулет удачи лучше крафтить ночью — шанс на редкую ауру выше на 5% (визуальный баг).</p>
-        </div>
-    </div>
-
-    <div class="year-block" id="y2021">
-        <div class="year-label">2021 - 2023</div>
-        <div class="wiki-card">
-            <h3>Doors (2022)</h3>
-            <p><span class="badge">[PRO]:</span> Если на 50 двери Фигура забагалась, просто сиди в шкафу, пока она не уйдет в другую сторону.</p>
-        </div>
-        <div class="wiki-card">
-            <h3>Brookhaven (2021)</h3>
-            <p><span class="badge">[SECRET]:</span> Код от сейфа в банке можно найти под лестницей в полицейском участке.</p>
-        </div>
-        <div class="wiki-card">
-            <h3>Blox Fruits (2023)</h3>
-            <p><span class="badge">[FARM]:</span> С фруктом Будда фарм на море 2 становится в 10 раз быстрее. Качай только статы в меч!</p>
-        </div>
-    </div>
+<div id="portal">
+    <button class="back-btn" onclick="closeGame()">ВЫЙТИ В МЕНЮ</button>
+    <iframe id="engine" src="" allow="autoplay; camera; microphone; fullscreen; clipboard-read; clipboard-write;"></iframe>
 </div>
+
+<script>
+    function openGame(url) {
+        const portal = document.getElementById('portal');
+        const engine = document.getElementById('engine');
+        engine.src = url;
+        portal.style.display = "block";
+    }
+
+    function closeGame() {
+        const portal = document.getElementById('portal');
+        const engine = document.getElementById('engine');
+        engine.src = "";
+        portal.style.display = "none";
+    }
+</script>
+
 </body>
 </html>
