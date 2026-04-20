@@ -3,80 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>UNBLOCKER PORTAL</title>
+    <title>System OS | Bypass</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #0b0b0b; color: white; font-family: sans-serif; overflow: hidden; }
-        
-        /* ГЛАВНОЕ МЕНЮ */
-        #menu {
+        /* ДИЗАЙН КАК В НАСТОЯЩЕЙ ОС */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background: url('https://wallpaperaccess.com/full/2454519.jpg') no-repeat center center fixed; 
+            background-size: cover; font-family: sans-serif; overflow: hidden;
+        }
+
+        /* РАБОЧИЙ СТОЛ С ИКОНКАМИ */
+        .desktop {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 100px);
+            grid-template-rows: repeat(auto-fill, 100px);
+            gap: 20px; padding: 30px; height: calc(100vh - 50px);
+        }
+
+        .icon {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; gap: 20px; padding: 20px; text-align: center;
+            color: white; text-align: center; cursor: pointer; border-radius: 10px;
+            transition: 0.2s; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
-        h1 { font-size: 24px; letter-spacing: 2px; color: #00A2FF; margin-bottom: 30px; }
+        .icon:hover { background: rgba(255, 255, 255, 0.1); }
+        .icon img { width: 60px; height: 60px; margin-bottom: 8px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .icon span { font-size: 12px; font-weight: bold; }
 
-        .launcher-btn {
-            background: #1c1c1c; border: 1px solid #333; color: #fff; width: 100%; max-width: 350px;
-            padding: 20px; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold;
-            transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 15px;
+        /* ОКНО ПРИЛОЖЕНИЯ (ТОЧЬ-В-ТОЧЬ) */
+        .window-overlay {
+            display: none; position: fixed; top: 0; left: 0; 
+            width: 100%; height: 100%; background: #000; z-index: 9999;
         }
-        .launcher-btn:hover { background: #00A2FF; border-color: #fff; transform: scale(1.02); }
-        .launcher-btn img { width: 24px; filter: invert(1); }
-
-        /* ИГРОВОЙ ЭКРАН */
-        #portal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; }
-        iframe { width: 100%; height: 100%; border: none; }
+        .window-header {
+            height: 40px; background: #202225; display: flex; 
+            align-items: center; justify-content: space-between; padding: 0 15px;
+            border-bottom: 1px solid #000;
+        }
+        .close-btn { 
+            background: #ff5f56; width: 12px; height: 12px; border-radius: 50%; 
+            border: none; cursor: pointer; 
+        }
         
-        .back-btn {
-            position: fixed; top: 10px; left: 10px; z-index: 10001;
-            background: rgba(255, 0, 0, 0.8); color: white; border: none;
-            padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;
+        iframe { width: 100%; height: calc(100% - 40px); border: none; }
+
+        /* ПАНЕЛЬ ЗАДАЧ */
+        .taskbar {
+            position: fixed; bottom: 0; width: 100%; height: 45px;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center; z-index: 10000;
         }
+        .start-btn { width: 30px; height: 30px; background: url('https://images.rbxcdn.com/7993077794bc3970726d40dae3b6e792.svg') no-repeat center; background-size: contain; filter: invert(1); }
     </style>
 </head>
 <body>
 
-<div id="menu">
-    <h1>BYPASS LAUNCHER v35</h1>
-    
-    <button class="launcher-btn" onclick="openGame('https://nowgg.lol/play/roblox-corporation/5349/roblox')">
-        <img src="https://cdn-icons-png.flaticon.com/512/220/220233.png"> ROBLOX (БЕЗ ВПН)
-    </button>
+    <div class="desktop">
+        <div class="icon" onclick="openApp('https://nowgg.lol/play/roblox-corporation/5349/roblox')">
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220233.png">
+            <span>Roblox</span>
+        </div>
 
-    <button class="launcher-btn" onclick="openGame('https://nowgg.lol/play/supercell/1234/brawl-stars')">
-        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png"> BRAWL STARS
-    </button>
+        <div class="icon" onclick="openApp('https://discord.com/app')">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+            <span>Discord</span>
+        </div>
 
-    <button class="launcher-btn" onclick="openGame('https://discord.com/app')">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"> DISCORD
-    </button>
+        <div class="icon" onclick="openApp('https://nowgg.lol/play/supercell/1234/brawl-stars')">
+            <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png">
+            <span>Brawl Stars</span>
+        </div>
+    </div>
 
-    <button class="launcher-btn" onclick="openGame('https://www.tiktok.com/')">
-        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"> TIKTOK (НОВЫЕ ВИДЕО)
-    </button>
+    <div class="taskbar">
+        <div class="start-btn"></div>
+    </div>
 
-    <p style="color: #444; font-size: 11px; margin-top: 50px;">SECURE TUNNEL ACTIVE | GITHUB MIRROR</p>
-</div>
+    <div id="app-window" class="window-overlay">
+        <div class="window-header">
+            <div style="color: #ccc; font-size: 13px; font-weight: bold;">System App</div>
+            <button class="close-btn" onclick="closeApp()"></button>
+        </div>
+        <iframe id="view" src="" allow="autoplay; camera; microphone; fullscreen; clipboard-read; clipboard-write;"></iframe>
+    </div>
 
-<div id="portal">
-    <button class="back-btn" onclick="closeGame()">ВЫЙТИ В МЕНЮ</button>
-    <iframe id="engine" src="" allow="autoplay; camera; microphone; fullscreen; clipboard-read; clipboard-write;"></iframe>
-</div>
+    <script>
+        function openApp(url) {
+            const win = document.getElementById('app-window');
+            const view = document.getElementById('view');
+            view.src = url;
+            win.style.display = "block";
+        }
 
-<script>
-    function openGame(url) {
-        const portal = document.getElementById('portal');
-        const engine = document.getElementById('engine');
-        engine.src = url;
-        portal.style.display = "block";
-    }
-
-    function closeGame() {
-        const portal = document.getElementById('portal');
-        const engine = document.getElementById('engine');
-        engine.src = "";
-        portal.style.display = "none";
-    }
-</script>
-
+        function closeApp() {
+            const win = document.getElementById('app-window');
+            const view = document.getElementById('view');
+            view.src = "";
+            win.style.display = "none";
+        }
+    </script>
 </body>
 </html>
